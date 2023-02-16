@@ -1,0 +1,29 @@
+#inicio{
+    width: 70%;
+}
+
+.card-img-top{
+    height: 50%;
+}
+
+#footer{
+    background-color: #f1f1f1;
+}
+
+#copyright{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#carouselExampleControls{
+    background-color: aquamarine;
+    width: 50%;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.carousel-item > a > img {
+    height: 35rem;
+}
+
+
