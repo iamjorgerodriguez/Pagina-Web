@@ -15,7 +15,6 @@
 }
 
 #carouselExampleControls{
-    background-color: aquamarine;
     width: 50%;
     margin: auto;
     margin-top: 2rem;
@@ -26,4 +25,59 @@
     height: 35rem;
 }
 
+.movie-title{
+    margin: 1rem;
+    margin-left: 5rem;
+}
 
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+   
+.carousel-control-next-icon {
+     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+hr{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+#card-movie{
+    width: 70%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.list-group{
+    width: 50%;
+    margin: auto;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.list-group > a{
+    background-color: #f1f1f1;
+}
+
+#footer{
+    bottom: 0rem;
+}
+
+.people-movies{
+    border: none;
+    height: 15rem;
+    width: 12rem;
+    margin-top: 2rem;
+}
+
+.people-movies > img {
+    height: 15rem;
+    width: 12rem;
+}
+
+.people-movies-footer {
+    height: 3rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+}

@@ -1,7 +1,6 @@
 class VideoSystemView {
   constructor() {
     this.main = $('main');
-    this.categories = $('.categories');
   }
 
   init() {
@@ -48,11 +47,7 @@ class VideoSystemView {
       </div>`);
   };
 
-  /**
-   * Enlace de botón de inicio
-   * @param {*} handler 
-   */
-
+  //Enlace de botón de inicio
   bindInit(handler) {
     $('#init').click((event) => {
       handler();
@@ -79,7 +74,7 @@ class VideoSystemView {
 
   showCategoryMovies(peliculas,categoria) {
     this.main.empty();
-    this.main.append(`<h1 name="">${categoria.toUpperCase()}</h1><hr><div id="carouselExampleControls" class="carousel slide" data-ride="carousel"><div id="carrusel-slider" class="carousel-inner"></div></div>`);
+    this.main.append(`<h2 class="movie-title">${categoria.toUpperCase()}</h2><hr><div id="carouselExampleControls" class="carousel slide" data-ride="carousel"><div id="carrusel-slider" class="carousel-inner"></div></div>`);
     let container = $('#carrusel-slider');
     let contador = 1;
 
@@ -104,7 +99,6 @@ class VideoSystemView {
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>`)
-
   };
 
   //Enlace a las Películas
@@ -119,20 +113,90 @@ class VideoSystemView {
 
   showMoviesCharacteristics(pelicula){
     this.main.empty();
-    this.main.append(`<div class="card mb-3" style="max-width: 540px;">
+    this.main.append(`<div class="card mb-3" id="card-movie">
     <div class="row g-0">
       <div class="col-md-4">
         <img src="${pelicula.image}" class="img-fluid rounded-start" alt="${pelicula.title}">
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">${pelicula.title}</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <h5 class="card-title"><strong>${pelicula.title}</strong></h5>
+          <p class="card-text"><strong>Nacionalidad:</strong> ${pelicula.nationality}</p>
+          <p class="card-text"><strong>Fecha Publicación:</strong> ${pelicula.publication}</p>
+          <p class="card-text">${pelicula.synopsis}</p>
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
     </div>
   </div>`)
+  };
+
+  //Enlace opciones menú 
+  bindMenu(handler) {
+    let opcionesMenu = document.querySelectorAll(".nav-item");
+    
+    for (let i = 0; i < opcionesMenu.length; i++) {
+      opcionesMenu[i].addEventListener("click",function (){
+        handler(this.getAttribute("data-option"));
+      });
+    }
+  };
+
+  showPeopleList(opcion, people){
+    this.main.empty();
+    this.main.append(`<div class="list-group" id="peopleList"></div>`);
+
+    let container = $("#peopleList");
+
+    for (let person of people) {
+      container.append(`<a data-category="${opcion}" data-name="${person.name}" data-lastname1="${person.lastname1}" data-lastname2="${person.lastname2}" href="#" class="list-group-item list-group-item-action">${person.name} ${person.lastname1} ${person.lastname2}</a>`)
+    }
+  };
+
+  //Enlace de los actores y directores para acceder a su ficha
+  bindPeople(handler){
+    let people = document.querySelectorAll(".list-group-item");
+    
+    for (let i = 0; i < people.length; i++) {
+      people[i].addEventListener("click",function (){
+        handler(this.getAttribute("data-category"),this.getAttribute("data-name"),this.getAttribute("data-lastname1"));
+      });
+    }
+  }
+
+  showPeopleCharacteristics(person,iteratorProductions){
+    this.main.empty();
+    console.log(...iteratorProductions);
+    this.main.append(`<div class="card mb-3" id="card-movie">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col-md-4">
+        <img src="${person.picture}" class="img-fluid rounded-start" alt="${person.name}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><strong>${person.name} ${person.lastname1} ${person.lastname2}</strong></h5>
+          <p class="card-text"><strong>Fecha de Nacimiento:</strong> ${person.born}</p>
+          <h4 class="card-title text-center">Producciones:</h4><hr>
+          <div class="container text-center my-3" id="productions-container">
+            <div class="row" id="productionsPerson">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`)
+
+    let containerProductions = $("#productionsPerson");
+    
+    for (let production of iteratorProductions) {
+      containerProductions.append(`<div class="col"><div class="card h-100 people-movies">
+          <img src="${production.image}" class="card-img-top" alt="${production.title}">
+          <div class="card-footer people-movies-footer">
+          <small class="text-muted">${production.title}</small>
+        </div>`)
+    }
+
+    containerProductions.append("</div>");
   };
 }
 

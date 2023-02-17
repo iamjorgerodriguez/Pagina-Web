@@ -23,12 +23,24 @@ class Person {
         return this.#name;
     }
 
+    get lastname1() {
+        return this.#lastname1;
+    }
+
+    get lastname2() {
+        return this.#lastname2;
+    }
+
     get born() {
-        return this.#born;
+        return this.#born.toLocaleDateString('en-us', { year:"numeric", month:"long", day:"numeric"});
+    }
+
+    get picture() {
+        return this.#picture;
     }
 
     toString() {
-        return this.#name + " - " + this.#lastname1 + " - " + this.#lastname2 + " - " + this.#born.toLocaleDateString() + " - " + this.#picture;
+        return this.#name + " - " + this.#lastname1 + " - " + this.#lastname2 + " - " + this.#born + " - " + this.#picture;
     }
 }
 
@@ -97,7 +109,7 @@ class Production {
     }
 
     get publication(){
-        return this.#publication;
+        return this.#publication.toLocaleDateString('en-us', { year:"numeric", month:"long", day:"numeric"});
     }
 
     get synopsis(){
