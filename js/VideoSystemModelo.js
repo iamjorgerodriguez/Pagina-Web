@@ -195,6 +195,33 @@ let VideoSystem = (function () {
                 }
             }
 
+            get productionsLength(){
+                return this.#productions.length;
+            }
+
+            /**
+             * Generará un array con X producciones
+             * aleatorias
+             */
+            randomProduction (numeroProducciones){
+                let arrayProducciones = [];
+                let numeroRandom;
+                let produccionRandom;
+                
+                for (let i = 0; i < numeroProducciones; i++) {
+                    numeroRandom = Math.floor(Math.random() * this.productionsLength);
+                    produccionRandom = this.#productions[numeroRandom];
+
+                    if (!(arrayProducciones.includes(produccionRandom))) {
+                        arrayProducciones.push(produccionRandom);
+                    }else{
+                        i--;
+                    }
+                }
+
+                return arrayProducciones;
+            }
+
             /**
              * Añade un actor a la lista #actors
              * @param {*} actor 
@@ -540,7 +567,32 @@ let VideoSystem = (function () {
                     }
                 }
             }
+
+            getDirectorProduction(production){
+                let produccionDirector;
+
+                for (let director of this.#directors) {
+                    if (this.#DirectorProduction.get(director).includes(production)){
+                        produccionDirector = director;
+                    }
+                }
+
+                return produccionDirector;
+            }
+
+            getActorsProduction(production){
+                let produccionActors = [];
+
+                for (let actor of this.#actors) {
+                    if (this.#ActorProduction.get(actor).includes(production)){
+                        produccionActors.push(actor);
+                    }
+                }
+
+                return produccionActors;
+            }
         }
+
         let instance = new VideoSystem(name);
         Object.freeze(instance);
 

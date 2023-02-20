@@ -81,3 +81,31 @@ hr{
     width: 12rem;
     margin-bottom: 2rem;
 }
+
+h4{
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.card-image-people{
+    margin-left: 2rem;
+}
+
+.card-div-left{
+    display: flex;
+    align-items: center;
+}
+
+.card-div-left > img{
+    width: 20rem;
+    height: 30rem;
+}
+
+body{
+    background-color: #f1f1f1;
+}

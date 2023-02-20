@@ -3,12 +3,14 @@ class VideoSystemView {
     this.main = $('main');
   }
 
-  init() {
+  //Función que carga el inicio de la página
+  init(randomProductions) {
     this.main.empty();
-    this.main.append(`<div class="categories">
+    this.main.append(`<h4>CATEGORÍAS</h4><hr>
+    <div class="categories">
         <div class="row row-cols-1 row-cols-md-3 g-4 m-4">
         <div class="col">
-          <div class="card h-100">
+          <div class="card h-100 ">
             <img src="img/Categorias/drama.jpg" class="card-img-top " alt="drama-img">
             <div class="card-body text-align">
             <a data-category="Drama" href="#"  class="Categorias"><h5 class="card-title">DRAMA</h5></a>
@@ -45,6 +47,26 @@ class VideoSystemView {
         </div>
       </div>
       </div>`);
+
+      this.main.append(`<h4>RECOMENDACIONES</h4><hr><div><div class="row row-cols-1 row-cols-md-3 g-4 m-4" id="random-movies"></div></div>`);
+      
+      let containerMovies = $("#random-movies");
+      //Producciones aleatorias
+      for (let i = 0; i < randomProductions.length; i++) {
+        containerMovies.append(`<div class="col">
+          <div class="card h-100">
+            <img src="${randomProductions[i].image}" class="card-img-top " alt="${randomProductions[i].title}">
+            <div class="card-body text-align">
+              <a data-title="${randomProductions[i].title}" href="#"  class="Peliculas"><h5 class="card-title">${randomProductions[i].title}</h5></a>
+              <p class="card-text">${randomProductions[i].synopsis}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">${randomProductions[i].publication}</small>
+            </div>
+          </div>
+        </div>
+      </div>`) 
+      }
   };
 
   //Enlace de botón de inicio
@@ -72,6 +94,11 @@ class VideoSystemView {
     }
   };
 
+  /**
+   * Función que mostrará las películas pertenecientes a una categoría
+   * @param {*} peliculas = Iterador de películas 
+   * @param {*} categoria = Categoría de las películas
+   */
   showCategoryMovies(peliculas,categoria) {
     this.main.empty();
     this.main.append(`<h2 class="movie-title">${categoria.toUpperCase()}</h2><hr><div id="carouselExampleControls" class="carousel slide" data-ride="carousel"><div id="carrusel-slider" class="carousel-inner"></div></div>`);
@@ -111,7 +138,13 @@ class VideoSystemView {
     }
   };
 
-  showMoviesCharacteristics(pelicula){
+  /**
+   * Mostrará la ficha de la película seleccionada
+   * @param {*} pelicula = Película elegida
+   * @param {*} director = Director de la película
+   * @param {*} actores []  = Actores de la película
+   */
+  showMoviesCharacteristics(pelicula, director, actores){
     this.main.empty();
     this.main.append(`<div class="card mb-3" id="card-movie">
     <div class="row g-0">
@@ -124,11 +157,24 @@ class VideoSystemView {
           <p class="card-text"><strong>Nacionalidad:</strong> ${pelicula.nationality}</p>
           <p class="card-text"><strong>Fecha Publicación:</strong> ${pelicula.publication}</p>
           <p class="card-text">${pelicula.synopsis}</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <div id="movie-casting">
+          <p class="card-text"><strong>Director/a: </strong><a data-category="director" data-name="${director.name}" data-lastname1="${director.lastname1}" data-lastname2="${director.lastname2}" href="#" class="list-group-item list-group-item-action">${director.name} ${director.lastname1} ${director.lastname2}</p></a>
+            <p class="card-text"><strong>Reparto: </strong></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>`)
+  </div>`);
+
+    let containerCasting = $("#movie-casting");
+
+    for (let i = 0; i < actores.length; i++) {
+      containerCasting.append(`<a data-category="actor" data-name="${actores[i].name}" data-lastname1="${actores[i].lastname1}" data-lastname2="${actores[i].lastname2}" href="#" class="list-group-item list-group-item-action">
+      <p class="card-text">
+      ${actores[i].name} ${actores[i].lastname1} ${actores[i].lastname2}
+      </p>
+      </a>`);
+    };
   };
 
   //Enlace opciones menú 
@@ -142,6 +188,7 @@ class VideoSystemView {
     }
   };
 
+  //Mostrará la lista de actores o directores
   showPeopleList(opcion, people){
     this.main.empty();
     this.main.append(`<div class="list-group" id="peopleList"></div>`);
@@ -164,13 +211,17 @@ class VideoSystemView {
     }
   }
 
+  /**
+   * Mostrará la ficha del director
+   * @param {*} person = Director o actor seleccionado
+   * @param {*} iteratorProductions = Iterador con las producciones del director o actor
+   */
   showPeopleCharacteristics(person,iteratorProductions){
     this.main.empty();
-    console.log(...iteratorProductions);
     this.main.append(`<div class="card mb-3" id="card-movie">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col-md-4">
-        <img src="${person.picture}" class="img-fluid rounded-start" alt="${person.name}">
+      <div class="col-md-4 card-div-left">
+        <img src="${person.picture}" class="img-fluid rounded-start card-image-people" alt="${person.name}">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -187,12 +238,12 @@ class VideoSystemView {
   </div>`)
 
     let containerProductions = $("#productionsPerson");
-    
+    //Recorre el iterador y muestra las producciones
     for (let production of iteratorProductions) {
       containerProductions.append(`<div class="col"><div class="card h-100 people-movies">
           <img src="${production.image}" class="card-img-top" alt="${production.title}">
           <div class="card-footer people-movies-footer">
-          <small class="text-muted">${production.title}</small>
+          <a data-title="${production.title}" href="#pelicula" class="Peliculas"><p class="card-text">${production.title}</p></a>
         </div>`)
     }
 
