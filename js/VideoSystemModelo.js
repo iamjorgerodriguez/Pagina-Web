@@ -1,14 +1,16 @@
 'use strict';
 
-import{
-    Person,Category,Movie,Serie,User}
-from './clases.js';
+import {
+    Person, Category, Movie, Serie, User
+}
+    from './clases.js';
 
-import{
-    NotThisType,NotFound404,ElementFound,SameEmail,SameName,DoesntExists,isNull}
-from './excepciones.js';
+import {
+    NotThisType, NotFound404, ElementFound, SameEmail, SameName, DoesntExists, isNull
+}
+    from './excepciones.js';
 
-let VideoSystem = (function () { 
+let VideoSystem = (function () {
     let instantiated; //Objeto con la instancia única VideoSystem
 
     function init(name) { //Inicialización del Singleton
@@ -129,8 +131,8 @@ let VideoSystem = (function () {
                 return this.#users.length;
             }
 
-             //Iterador de usuarios
-             get users() {
+            //Iterador de usuarios
+            get users() {
                 let listUsers = this.#users;
                 //Retorno el objeto [Symbol.iterator]
                 return {
@@ -195,7 +197,7 @@ let VideoSystem = (function () {
                 }
             }
 
-            get productionsLength(){
+            get productionsLength() {
                 return this.#productions.length;
             }
 
@@ -203,18 +205,18 @@ let VideoSystem = (function () {
              * Generará un array con X producciones
              * aleatorias
              */
-            randomProduction (numeroProducciones){
+            randomProduction(numeroProducciones) {
                 let arrayProducciones = [];
                 let numeroRandom;
                 let produccionRandom;
-                
+
                 for (let i = 0; i < numeroProducciones; i++) {
                     numeroRandom = Math.floor(Math.random() * this.productionsLength);
                     produccionRandom = this.#productions[numeroRandom];
 
                     if (!(arrayProducciones.includes(produccionRandom))) {
                         arrayProducciones.push(produccionRandom);
-                    }else{
+                    } else {
                         i--;
                     }
                 }
@@ -405,7 +407,6 @@ let VideoSystem = (function () {
                     }
                 }
 
-                
                 return {
                     *[Symbol.iterator]() {
                         for (let i = 0; i < listProCat.length; i++) {
@@ -553,7 +554,12 @@ let VideoSystem = (function () {
                 return this.#ActorProduction.get(actor).length;
             }
 
-            //Iterador de producciones asignadas a una categoria
+            /**
+             * Obtendrá un iterador de las peliculas
+             * asignadas a un actor 
+             * @param {*} actor 
+             * @returns 
+             */
             getProductionsActor(actor) {
                 //Controla que la categoria no sea igual a null
                 if (actor === null) throw new isNull(" Actor ");
@@ -568,11 +574,17 @@ let VideoSystem = (function () {
                 }
             }
 
-            getDirectorProduction(production){
+            /**
+             * Obtendrá un iterador de las peliculas
+             * asignadas a un director
+             * @param {*} production 
+             * @returns 
+             */
+            getDirectorProduction(production) {
                 let produccionDirector;
 
                 for (let director of this.#directors) {
-                    if (this.#DirectorProduction.get(director).includes(production)){
+                    if (this.#DirectorProduction.get(director).includes(production)) {
                         produccionDirector = director;
                     }
                 }
@@ -580,16 +592,41 @@ let VideoSystem = (function () {
                 return produccionDirector;
             }
 
-            getActorsProduction(production){
+            /**
+             * Obtendrá un array de actores
+             * asignados a una producción
+             * @param {*} production 
+             * @returns 
+             */
+            getActorsProduction(production) {
                 let produccionActors = [];
 
                 for (let actor of this.#actors) {
-                    if (this.#ActorProduction.get(actor).includes(production)){
+                    if (this.#ActorProduction.get(actor).includes(production)) {
                         produccionActors.push(actor);
                     }
                 }
 
                 return produccionActors;
+            }
+
+            /**
+             * Obtendrá un objeto Production
+             * a partir de su título
+             * @param {*} title 
+             * @returns 
+             */
+            findMovieByTitle(title) {
+                let productionSelected;
+                //Recorro todas las producciones añadidas
+                for (let produccion of this.productions) {
+                    //Busco la producción a partir del título obtenido al hacer click
+                    if (produccion.title == title) {
+                        productionSelected = produccion;
+                    }
+                };
+
+                return productionSelected;
             }
         }
 

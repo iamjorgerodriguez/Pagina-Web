@@ -144,30 +144,24 @@ class VideoSystemController {
         this.#videoSystemVista.busqueda();
     }
 
-    //Método enlace a los botones de categorías
+    //Enlaza a los botones de categorías
     handleCategorias = (categoria) => {
         this.#videoSystemVista.showCategoryMovies(this.#videoSystemModelo.getProductionsCategory(categoria),categoria);
         //Enlazo las películas del carrusel a su ficha
         this.#videoSystemVista.bindPeliculas(this.handleMovies);
     }
     
-    //Método que enlaza las películas con su ficha
+    //Enlaza las películas con su ficha
     handleMovies = (titulo) => {
-        let productionSelected;
-        //Recorro todas las producciones añadidas
-        for (let produccion of this.#videoSystemModelo.productions) {
-            //Busco la producción a partir del título obtenido al hacer click
-            if (produccion.title == titulo) {
-                productionSelected = produccion;
-            }
-        };
-
+        let productionSelected = this.#videoSystemModelo.findMovieByTitle(titulo);
         //Envio la produccion con su director y sus actores
         this.#videoSystemVista.showMoviesCharacteristics(productionSelected, this.#videoSystemModelo.getDirectorProduction(productionSelected),this.#videoSystemModelo.getActorsProduction(productionSelected));
         this.#videoSystemVista.bindPeople(this.handlePeople); 
+        this.#videoSystemVista.bindNewWindow(this.handleNewWindow);
     }
     
-    //Función que enviará uno u otro iterador en función del data-option
+    //Enviará uno u otro iterador en función del data-option
+    //O cerrará todas las ventanas emergentes a la vez
     handleMenu = (opcion) => {
         if (opcion == "director") {
             this.#videoSystemVista.showPeopleList(opcion, this.#videoSystemModelo.directors);
@@ -175,9 +169,10 @@ class VideoSystemController {
         }if(opcion == "actor"){
             this.#videoSystemVista.showPeopleList(opcion, this.#videoSystemModelo.actors);
             this.#videoSystemVista.bindPeople(this.handlePeople); 
-        }
+        }if(opcion == "windows"){
+            this.#videoSystemVista.closeWindows();
+        };
     }
-
 
     handlePeople = (categoria, personName, personLastName1) => {
         let personSelected;
@@ -205,6 +200,11 @@ class VideoSystemController {
 
         this.#videoSystemVista.showPeopleCharacteristics(personSelected,iteratorProductions);
         this.#videoSystemVista.bindPeliculas(this.handleMovies);
+    }
+    
+    //Enlaza el boton de información a una nueva ventana
+    handleNewWindow = (titulo) => {
+        this.#videoSystemVista.newWindow(this.#videoSystemModelo.findMovieByTitle(titulo));
     }
 }
 

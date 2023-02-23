@@ -109,3 +109,20 @@ a:hover{
 body{
     background-color: #f1f1f1;
 }
+
+#newwindow{
+    top: 1rem;
+    right: 2rem;
+    position: absolute;
+}
+
+.new-window-img{
+    width: 50%;
+    margin-bottom: 3rem;
+}
+
+#new-window-title{
+    margin-bottom: 2rem;
+    padding: 1rem;
+    color: white;
+}
