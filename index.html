@@ -8,56 +8,70 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!--Font Awesome-->
-    <link href="fontawesome/css/all.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link rel="icon" type="image/jpg" href="img/logo.png" />
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/e6cc7d3550.js" crossorigin="anonymous"></script>
     <title>Rosebud</title>
 </head>
-
 <body>
     <header class="header" bg-dark>
         <nav class="navbar navbar-expand-lg bg-primary ">
             <div class="container-fluid">
-                <a id="init" class="navbar-brand text-light" href="#">Rosebud</a>
+                <a id="init" class="navbar-brand text-light" href="#">ROSEBUD</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li data-option="director" class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="#">Directores</a>
-                        </li>
-                        <li data-option="actor" class="nav-item">
+                    <ul class="navbar-nav" id="list-menu">
+                        <li data-option="actor" class="nav-item nav-menu">
                             <a class="nav-link text-white" href="#">Actores</a>
                         </li>
-                        <li data-option="categories" class="nav-item dropdown Categorias">
+                        <li data-option="director" class="nav-item nav-menu">
+                            <a class="nav-link active text-white" aria-current="page" href="#">Directores</a>
+                        </li>
+                        <li data-option="windows" class="nav-item nav-menu">
+                            <a class="nav-link active text-white" aria-current="page" href="#">Cerrar Ventanas</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="true">
+                                Registro
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a data-option-form="AddProd" class="dropdown-item dropdown-form" href="#">Añadir
+                                        Producción</a></li>
+                                <li><a data-option-form="DelProd" class="dropdown-item dropdown-form" href="#">Eliminar
+                                        Producción</a></li>
+                                <li><a data-option-form="AssignProd" class="dropdown-item dropdown-form"
+                                        href="#">Asignar Producción</a></li>
+                                <li><a data-option-form="DeasProd" class="dropdown-item dropdown-form"
+                                        href="#">Desasignar Producción</a></li>
+                                <li><a data-option-form="AddCat" class="dropdown-item dropdown-form" href="#">Añadir
+                                        Categoría</a>
+                                <li><a data-option-form="DelCat" class="dropdown-item dropdown-form" href="#">Eliminar
+                                        Categoría</a>
+                                <li><a data-option-form="AddPer" class="dropdown-item dropdown-form" href="#">Añadir
+                                        Persona</a>
+                                </li>
+                                <li><a data-option-form="DelPer" class="dropdown-item dropdown-form" href="#">Eliminar
+                                        Persona</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="delete-dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="true">
                                 Categorías
                             </a>
                             <ul class="dropdown-menu" href="#">
                                 <li><a data-category="Drama" class="dropdown-item Categorias" href="#">Drama</a></li>
-                                <li><a data-category="Ciencia Ficción" class="dropdown-item Categorias" href="#">Ciencia-Ficción</a></li>
-                                <li><a data-category="Thriller" class="dropdown-item Categorias" href="#">Thriller</a>
-                                </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Registro</a>
-                        </li>
-                        <li data-option="windows" class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="#">Cerrar Ventanas</a>
                         </li>
                     </ul>
                 </div>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" id="peliculaBuscar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-primary mx-1" type="submit" id="Buscador">Buscar</button>
-                </form>
             </div>
         </nav>
     </header>
@@ -70,27 +84,33 @@
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://es-es.facebook.com"
                     target="_blank" role="button" data-mdb-ripple-color="dark">
                     <i class="fab fa-facebook-f"></i>
+                    FACEBOOK
                 </a>
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://twitter.com" role="button"
                     target="_blank" data-mdb-ripple-color="dark">
                     <i class="fab fa-twitter"></i>
+                    TWITTER
                 </a>
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://www.google.es" role="button"
                     target="_blank" data-mdb-ripple-color="dark">
                     <i class="fab fa-google"></i>
+                    GOOGLE
                 </a>
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://www.instagram.com" role="button"
                     target="_blank" data-mdb-ripple-color="dark">
                     <i class="fab fa-instagram"></i>
+                    INSTAGRAM
                 </a>
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="https://es.linkedin.com" role="button "
                     target="_blank" data-mdb-ripple-color="dark">
                     <i class="fab fa-linkedin"></i>
+                    LINKEDIN
                 </a>
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1"
                     href="https://github.com/iamjorgerodriguez/Pagina-Web.git" role="button" target="_blank"
                     data-mdb-ripple-color="dark">
                     <i class="fab fa-github"></i>
+                    GITHUB
                 </a>
             </section>
         </div>
@@ -100,6 +120,7 @@
         </div>
     </footer>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"

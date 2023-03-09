@@ -1,3 +1,7 @@
+main{
+    min-height: 32rem;
+}
+
 #inicio{
     width: 70%;
 }
@@ -60,8 +64,8 @@ hr{
     background-color: #f1f1f1;
 }
 
-#footer{
-    bottom: 0rem;
+.list-group-item-action{
+    background-color: white;
 }
 
 .people-movies{
@@ -125,4 +129,93 @@ body{
     margin-bottom: 2rem;
     padding: 1rem;
     color: white;
+}
+
+#forms-register{
+    margin: auto;
+    background-color: white;
+    padding: 2rem;
+}
+
+#forms-register > div > select{
+    width: 100%;
+    height: 2.5rem;
+    border: 1px solid  #c2c2c2;
+}
+
+#forms-register > div {
+    margin-top: 1rem;
+}
+
+#next, #previous{
+    margin: auto;
+    margin-top: 2rem;
+}
+
+#next{
+    margin-right: 1rem;
+}
+
+#previous{
+    margin-left: 1rem;
+}
+
+#next > img, #previous > img{
+    height: 2rem;
+}
+
+#image-movie{
+    height: 100%;
+}
+
+#form-assign-production{
+    background-color: white;
+    margin: auto;
+    margin-top: 4rem;
+    padding: 2rem;
+}
+
+#form-assign-production > div > select{
+    width: 100%;
+    height: 2.5rem;
+    border: 1px solid  #c2c2c2;
+}
+
+.form-checkboxes{
+    width: 50%;
+    margin: auto;
+    margin-top: 3rem;
+    text-align: center;
+    background-color: white;
+    padding: 3rem;
+}
+
+.form-checkboxes > h4{
+    margin-bottom: 4rem;
+}
+
+#submit-assign, #submit-deassign{
+    margin-top: 3rem;
+}
+
+.modal{
+    margin-top: 7rem;
+}
+
+.modal-title{
+    color: white;
+}
+
+#produccion-por-defecto{
+    margin: auto;
+}
+
+.select-add-production{
+    width: 100%;
+    height: 2.5rem;
+    border: 1px solid  #c2c2c2;
+}
+
+#btnAddProd, #btnAddProdReset{
+    margin-top: 2rem;
 }

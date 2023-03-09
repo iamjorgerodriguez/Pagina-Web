@@ -57,6 +57,11 @@ let VideoSystem = (function () {
 
                 this.#categories.push(categoria);
 
+                //Si no existe en el map de categorias y producciones, lo añado
+                if (!(this.#CategoryProduction.has(categoria))) {
+                    this.#CategoryProduction.set(categoria,[]);
+                }
+
                 return this.#categories.length;
             }
 
@@ -72,6 +77,9 @@ let VideoSystem = (function () {
                 if (i == -1) throw new NotFound404(categoria);
 
                 this.#categories.splice(i, 1);
+
+                //Elimino relaciones con otros objetos
+                this.#CategoryProduction.delete(categoria);
 
                 return this.#categories.length;
             }
@@ -181,6 +189,25 @@ let VideoSystem = (function () {
 
                 this.#productions.splice(i, 1);
 
+                //Elimino las relaciones con otros objetos
+                for (let director of this.#directors) {
+                    if (this.#DirectorProduction.get(director).includes(produccion)) {
+                        this.deassignDirector(director,produccion);
+                    }
+                }
+
+                for (let actor of this.#actors) {
+                    if (this.#ActorProduction.get(actor).includes(produccion)) {
+                        this.deassignActor(actor,produccion);
+                    }
+                }
+
+                for (let categoria of this.#categories) {
+                    if (this.#CategoryProduction.get(categoria).includes(produccion)) {
+                        this.deassignCategory(categoria,produccion);
+                    }
+                }
+
                 return this.#productions.length;
             }
 
@@ -208,19 +235,26 @@ let VideoSystem = (function () {
             randomProduction(numeroProducciones) {
                 let arrayProducciones = [];
                 let numeroRandom;
+                //Guardará las producciones aleatorias
                 let produccionRandom;
 
-                for (let i = 0; i < numeroProducciones; i++) {
-                    numeroRandom = Math.floor(Math.random() * this.productionsLength);
-                    produccionRandom = this.#productions[numeroRandom];
-
-                    if (!(arrayProducciones.includes(produccionRandom))) {
-                        arrayProducciones.push(produccionRandom);
-                    } else {
-                        i--;
+                //Si hay menos películas de las que se piden, asigno todas las películas
+                //del array #productions al array de producciones aleatorias
+                if (this.productionsLength < numeroProducciones) {
+                    arrayProducciones = this.#productions;
+                }else{
+                    for (let i = 0; i < numeroProducciones; i++) {
+                        numeroRandom = Math.floor(Math.random() * this.productionsLength);
+                        produccionRandom = this.#productions[numeroRandom];
+                        //Compruebo que no se encuentra ya en el array
+                        if (!(arrayProducciones.includes(produccionRandom))) {
+                            arrayProducciones.push(produccionRandom);
+                        } else {
+                            i--;
+                        }
                     }
                 }
-
+                
                 return arrayProducciones;
             }
 
@@ -238,6 +272,11 @@ let VideoSystem = (function () {
                 //Controla que el actor a añadir se encuentre ya en la lista
                 let i = this.#actors.indexOf(actor);
                 if (i != -1) throw new ElementFound(actor);
+
+                //Si no existe en el map de actores y producciones, lo añado
+                if (!(this.#ActorProduction.has(actor))) {
+                    this.#ActorProduction.set(actor,[]);
+                }
 
                 this.#actors.push(actor);
 
@@ -260,6 +299,12 @@ let VideoSystem = (function () {
                 if (i == -1) throw new NotFound404(actor);
 
                 this.#actors.splice(i, 1);
+
+                for (let produccion of this.productions) {
+                    if (this.#ActorProduction.get(actor).includes(produccion)) {
+                        this.deassignActor(actor,produccion);
+                    }
+                }
 
                 return this.#actors.length;
             }
@@ -291,6 +336,11 @@ let VideoSystem = (function () {
                 //Controla que el actor a añadir se encuentre ya en la lista
                 let i = this.#directors.indexOf(director);
                 if (i != -1) throw new ElementFound(director);
+                
+                //Si no existe en el map de actores y producciones, lo añado
+                if (!(this.#DirectorProduction.has(director))) {
+                    this.#DirectorProduction.set(director,[]);
+                }
 
                 this.#directors.push(director);
 
@@ -313,6 +363,13 @@ let VideoSystem = (function () {
                 if (i == -1) throw new NotFound404(director);
 
                 this.#directors.splice(i, 1);
+
+                //Elimino relaciones con otros objetos
+                for (let produccion of this.productions) {
+                    if (this.#DirectorProduction.get(director).includes(produccion)) {
+                        this.deassignDirector(director,produccion);
+                    }
+                }
 
                 return this.#directors.length;
             }
@@ -478,7 +535,7 @@ let VideoSystem = (function () {
                 return this.#DirectorProduction.get(director).length;
             }
 
-            //Iterador de producciones asignadas a una categoria
+            //Iterador de producciones asignadas a un director
             getProductionsDirector(director) {
                 //Controla que la categoria no sea igual a null
                 if (director === null) throw new isNull(" Categoría ");
@@ -575,17 +632,17 @@ let VideoSystem = (function () {
             }
 
             /**
-             * Obtendrá un iterador de las peliculas
-             * asignadas a un director
+             * Obtendrá un array de directores 
+             * asignados a una producción
              * @param {*} production 
              * @returns 
              */
             getDirectorProduction(production) {
-                let produccionDirector;
+                let produccionDirector = [];
 
                 for (let director of this.#directors) {
                     if (this.#DirectorProduction.get(director).includes(production)) {
-                        produccionDirector = director;
+                        produccionDirector.push(director);
                     }
                 }
 
@@ -616,17 +673,103 @@ let VideoSystem = (function () {
              * @param {*} title 
              * @returns 
              */
-            findMovieByTitle(title) {
+            findProductionByTitle(title) {
                 let productionSelected;
                 //Recorro todas las producciones añadidas
                 for (let produccion of this.productions) {
-                    //Busco la producción a partir del título obtenido al hacer click
-                    if (produccion.title == title) {
+                    //Busco la producción a partir del título obtenido
+                    if (produccion.title.toUpperCase() == title.toUpperCase()) {
                         productionSelected = produccion;
                     }
                 };
 
                 return productionSelected;
+            }
+
+            //Busca a un actor por su nombre y su primer apellido
+            //Devuelve el objeto person con todos sus atributos
+            findActorByNameLastname(person){
+                let actorSelected;
+
+                for (let actor of this.actors) {
+                    if ((person.name == actor.name) && (person.lastname1 == actor.lastname1)) {
+                        actorSelected = actor;
+                    }
+                }
+
+                return actorSelected;
+            }
+
+            //Busca a un director por su nombre y su primer apellido
+            //Devuelve el objeto person con todos sus atributos
+            findDirectorByNameLastname(person){
+                let directorSelected;
+
+                for (let director of this.directors) {
+                    if ((person.name == director.name) && (person.lastname1 == director.lastname1)) {
+                        directorSelected = director;
+                    }
+                }
+
+                return directorSelected;
+            }
+
+            //Busca la categoría por el nombre
+            findCategoryByName(categoria){
+                let categorySelected;
+
+                for (let category of this.categories) {
+                    if (category.name == categoria) {
+                        categorySelected = category;
+                    }
+                }
+                
+                return categorySelected;
+            }
+
+            //Busca al director por su posición en el array
+            findDirectorByPosition(position){
+                let contador = 0;
+                let directorSelected;
+
+                for (let director of this.directors) {
+                    if (contador == position) {
+                        directorSelected = director;
+                        break;
+                    }
+                    contador++;
+                }
+                return directorSelected;
+            }
+
+            //Busca al actor por su posición en el array
+            findActorByPosition(position){
+                let contador = 0;
+                let actorSelected;
+
+                for (let actor of this.actors) {
+                    if (contador == position) {
+                        actorSelected = actor;
+                        break;
+                    }
+                    contador++;
+                }
+                return actorSelected;
+            }
+
+            //Busca la categoría por su posición en el array
+            findCategoryByPosition(position){
+                let contador = 0;
+                let categorySelected;
+
+                for (let category of this.categorias) {
+                    if (contador == position) {
+                        categorySelected = category;
+                        break;
+                    }
+                    contador++;
+                }
+                return categorySelected;
             }
         }
 

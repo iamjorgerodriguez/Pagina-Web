@@ -7,14 +7,14 @@ import {
     from './clases.js';
 
 class VideoSystemController {
-    #videoSystemModelo;
-    #videoSystemVista;
+    #model;
+    #view;
 
     #loadVideoSystemObjects() {
         //Directores
         let d1 = new Person("Francis","Ford","Coppola",new Date("Apr 7 1939"),"../img/Directores/coppola.jpg");
         let d2 = new Person("George","Orson","Welles",new Date("May 6 1915"),"../img/Directores/welles.jpg");
-        let d3 = new Person("David Andrew","Leo","Fincher",new Date("Aug 28 1962"),"../img/Directores/fincher.jpg");
+        let d3 = new Person("David-Andrew","Leo","Fincher",new Date("Aug 28 1962"),"../img/Directores/fincher.jpg");
         let d4 = new Person("Christopher", "Edward" ,"Nolan",new Date("Jul 30 1970"),"../img/Directores/nolan.jpg");
         let d5 = new Person("Steven","Allan" ,"Spielberg" ,new Date("Dec 18 1946"),"../img/Directores/spielberg.jpg");
         let d6 = new Person("James","Francis" ,"Cameron" ,new Date("Aug 16 1954"),"../img/Directores/cameron.jpg");
@@ -57,7 +57,7 @@ class VideoSystemController {
         let pr5 = new Movie("Terminator", "EE.UU", new Date("Feb 12 1984"), "En el año 2029 las máquinas dominan el mundo. Los rebeldes que luchan contra ellas tienen como líder a John Connor, un hombre que nació en los años ochenta","../img/Peliculas/teminator.jpg");
         let pr6 = new Movie("Interstellar", "EE.UU", new Date("Nov 7 2014"), "Un grupo de científicos y exploradores, encabezados por Cooper, se embarcan en un viaje espacial para encontrar un lugar con las condiciones necesarias para reemplazar a la Tierra y comenzar una nueva vida allí.","../img/Peliculas/interstellar.jpg");
         let pr7 = new Movie("Origen", "EE.UU", new Date("Aug 6 2010"), "Dom Cobb es un ladrón capaz de adentrarse en los sueños de la gente y hacerse con sus secretos. Sin embargo, ahora tiene que llevar a cabo una misión diferente a lo que ha hecho siempre: realizar una incepción para implantar una idea en el subconsciente de una persona.","../img/Peliculas/inception.jpg");
-        let pr8 = new Serie("Black Mirror", "United Kingdom", new Date("Jun 16 2011"), "El lado oscuro de la era tecnológica en la que se vive: la paranoia de ser vigilados como en un panóptico, los usos terroristas de las nuevas herramientas y su relación con la experiencia cotidiana.","../img/Peliculas/blackmirror.jpg");
+        let pr8 = new Serie("Black Mirror", "United Kingdom", new Date("Jun 16 2011"), "El lado oscuro de la era tecnológica en la que se vive: la paranoia de ser vigilados como en un panóptico, los usos terroristas de las nuevas herramientas y su relación con la experiencia cotidiana.","../img/Peliculas/blackmirror.jpg",new Resource,new Coordinate, 8);
         //Producciones Thriller
         let pr9 = new Movie("Seven", "EE.UU", new Date("Sep 22 1995"), "Somerset es un solitario y veterano detective a punto de retirarse que se encuentra con Mills, un joven impulsivo. Ambos investigan un particular asesinato. Es este el primero de una serie de crímenes que aluden los siete pecados capitales.","../img/Peliculas/seven.jpg");
         let pr10 = new Movie("Oceans Eleven", "EE.UU", new Date("Sep 23 1994"), "Justo después de salir de prisión en libertad condicional, Danny Ocean planea su próximo robo. En este caso, el carismático ladrón quiere robar 150 millones de dólares de tres casinos de Las Vegas.","../img/Peliculas/oceans.jpg");
@@ -66,111 +66,112 @@ class VideoSystemController {
         //Producciones Sin Categoría
         let pr13 = new Movie("Atrápame Si Puedes", "EE.UU", new Date("Jan 24 2003"), "Un adolescente estafador (Leonardo DiCaprio) se hace pasar exitosamente por un piloto de una aerolínea, un cirujano y un abogado.","../img/Peliculas/atrapame.jpg");
         //Categorías
-        let c1=new Category("Drama","Responde a una estructura narrativa en la que se presenta un conflicto personal en el protagonista o entre diferentes personajes.");
-        let c2=new Category("Ciencia Ficción", "Es un género narrativo que sitúa la acción en unas coordenadas espacio-temporales imaginarias y diferentes a las nuestras, y que especula racionalmente sobre posibles avances científicos");
-        let c3=new Category("Thriller", "Se caracteriza por tener una trama emocionante que mantiene al lector o espectador en constante suspenso, siguiendo con mucha atención el desarrollo de la historia hasta la resolución final del conflicto");
+        let c1=new Category("Drama","Responde a una estructura narrativa en la que se presenta un conflicto personal en el protagonista o entre diferentes personajes.", "img/Categorias/drama.jpg");
+        let c2=new Category("Ciencia Ficción", "Es un género narrativo que sitúa la acción en unas coordenadas espacio-temporales imaginarias y diferentes a las nuestras, y que especula racionalmente sobre posibles avances científicos", "img/Categorias/ciencia.jpg" );
+        let c3=new Category("Thriller", "Se caracteriza por tener una trama emocionante que mantiene al lector o espectador en constante suspenso, siguiendo con mucha atención el desarrollo de la historia hasta la resolución final del conflicto", "img/Categorias/thriller.jpg");
         //Usuario
         let u1 = new User("paulnewman","paulnewman@redford.com","JohnDoe");
 
-
         //Asignación de directores con sus producciones
-        this.#videoSystemModelo.assignDirector(d1,pr1,pr4);
-        this.#videoSystemModelo.assignDirector(d2,pr2);
-        this.#videoSystemModelo.assignDirector(d3,pr05,pr9);
-        this.#videoSystemModelo.assignDirector(d4,pr6,pr7,pr12);
-        this.#videoSystemModelo.assignDirector(d5,pr3,pr13);
-        this.#videoSystemModelo.assignDirector(d6,pr5);
-        this.#videoSystemModelo.assignDirector(d7,pr10);
-        this.#videoSystemModelo.assignDirector(d8,pr11,pr04);
-        this.#videoSystemModelo.assignDirector(d9,pr8);
+        this.#model.assignDirector(d1,pr1,pr4);
+        this.#model.assignDirector(d2,pr2);
+        this.#model.assignDirector(d3,pr05,pr9);
+        this.#model.assignDirector(d4,pr6,pr7,pr12);
+        this.#model.assignDirector(d5,pr3,pr13);
+        this.#model.assignDirector(d6,pr5);
+        this.#model.assignDirector(d7,pr10);
+        this.#model.assignDirector(d8,pr11,pr04);
+        this.#model.assignDirector(d9,pr8);
         //Asignación de actores con sus producciones
-        this.#videoSystemModelo.assignActor(a1,pr1,pr4);
-        this.#videoSystemModelo.assignActor(a2,pr1);
-        this.#videoSystemModelo.assignActor(a3,pr2);
-        this.#videoSystemModelo.assignActor(a4,pr2);
-        this.#videoSystemModelo.assignActor(a5,pr3);
-        this.#videoSystemModelo.assignActor(a6,pr3);
-        this.#videoSystemModelo.assignActor(a7,pr4);
-        this.#videoSystemModelo.assignActor(a8,pr5);
-        this.#videoSystemModelo.assignActor(a9,pr5);
-        this.#videoSystemModelo.assignActor(a10,pr6);
-        this.#videoSystemModelo.assignActor(a11,pr6);
-        this.#videoSystemModelo.assignActor(a12,pr04,pr7,pr13);
-        this.#videoSystemModelo.assignActor(a13,pr7);
-        this.#videoSystemModelo.assignActor(a14,pr8);
-        this.#videoSystemModelo.assignActor(a15,pr8);
-        this.#videoSystemModelo.assignActor(a16,pr04,pr05,pr9,pr10);
-        this.#videoSystemModelo.assignActor(a17,pr9);
-        this.#videoSystemModelo.assignActor(a18,pr10);
-        this.#videoSystemModelo.assignActor(a19,pr11);
-        this.#videoSystemModelo.assignActor(a20,pr11);
-        this.#videoSystemModelo.assignActor(a21,pr12);
-        this.#videoSystemModelo.assignActor(a22,pr12);
-        this.#videoSystemModelo.assignActor(a23,pr13);
-        this.#videoSystemModelo.assignActor(a24,pr05);
+        this.#model.assignActor(a1,pr1,pr4);
+        this.#model.assignActor(a2,pr1);
+        this.#model.assignActor(a3,pr2);
+        this.#model.assignActor(a4,pr2);
+        this.#model.assignActor(a5,pr3);
+        this.#model.assignActor(a6,pr3);
+        this.#model.assignActor(a7,pr4);
+        this.#model.assignActor(a8,pr5);
+        this.#model.assignActor(a9,pr5);
+        this.#model.assignActor(a10,pr6);
+        this.#model.assignActor(a11,pr6);
+        this.#model.assignActor(a12,pr04,pr7,pr13);
+        this.#model.assignActor(a13,pr7);
+        this.#model.assignActor(a14,pr8);
+        this.#model.assignActor(a15,pr8);
+        this.#model.assignActor(a16,pr04,pr05,pr9,pr10);
+        this.#model.assignActor(a17,pr9);
+        this.#model.assignActor(a18,pr10);
+        this.#model.assignActor(a19,pr11);
+        this.#model.assignActor(a20,pr11);
+        this.#model.assignActor(a21,pr12);
+        this.#model.assignActor(a22,pr12);
+        this.#model.assignActor(a23,pr13);
+        this.#model.assignActor(a24,pr05);
         //Asinación de categorías con sus producciones
-        this.#videoSystemModelo.assignCategory(c1,pr1,pr2,pr3,pr4,pr04,pr05);
-        this.#videoSystemModelo.assignCategory(c2,pr5,pr6,pr7,pr8);
-        this.#videoSystemModelo.assignCategory(c3,pr9,pr10,pr11,pr12);
+        this.#model.assignCategory(c1,pr1,pr2,pr3,pr4,pr04,pr05);
+        this.#model.assignCategory(c2,pr5,pr6,pr7,pr8);
+        this.#model.assignCategory(c3,pr9,pr10,pr11,pr12);
         //Añado usuario
-        this.#videoSystemModelo.addUser(u1);
+        this.#model.addUser(u1);
     }
 
-    constructor(videoSystemModelo, videoSystemVista) {
-        this.#videoSystemModelo = videoSystemModelo;
-        this.#videoSystemVista = videoSystemVista;
+    constructor (model, view) {
+        this.#model = model;
+        this.#view = view;
 
         // Eventos iniciales del Controlador
         this.onLoad();
         this.onInit();
         //Enlazo el menú, las categorias, las películas aleatorias y el nombre para el inicio 
-        this.#videoSystemVista.bindInit(this.onInit);
+        this.#view.bindInit(this.onInit);
     }
 
     onInit = () => {
-        this.#videoSystemVista.init(this.#videoSystemModelo.randomProduction(3));
-        this.#videoSystemVista.bindCategorias(this.handleCategorias);
-        this.#videoSystemVista.bindMenu(this.handleMenu);
-        this.#videoSystemVista.bindPeliculas(this.handleMovies);
+        this.#view.init(this.#model.categorias,this.#model.randomProduction(3));
+        this.chargeMenu();
+        this.#view.bindPeliculas(this.handleMovies);
+        this.#view.bindForm(this.handleForm);
     }
 
     onLoad = () => {
         //Cargo los objetos al VideoSystem
         this.#loadVideoSystemObjects();
+        this.#view.bindMenu(this.handleMenu);
     }
 
-    //Aún en desarrollo
-    handleBuscar = () => {
-        this.#videoSystemVista.busqueda();
+    //Actualiza el menú de categorías
+    chargeMenu = () => {
+        this.#view.showCategoryMenu(this.#model.categorias);
+        this.#view.bindCategorias(this.handleCategorias);
     }
 
     //Enlaza a los botones de categorías
     handleCategorias = (categoria) => {
-        this.#videoSystemVista.showCategoryMovies(this.#videoSystemModelo.getProductionsCategory(categoria),categoria);
+        this.#view.showCategoryMovies(this.#model.getProductionsCategory(categoria),categoria);
         //Enlazo las películas del carrusel a su ficha
-        this.#videoSystemVista.bindPeliculas(this.handleMovies);
+        this.#view.bindPeliculas(this.handleMovies);
     }
     
     //Enlaza las películas con su ficha
     handleMovies = (titulo) => {
-        let productionSelected = this.#videoSystemModelo.findMovieByTitle(titulo);
+        let productionSelected = this.#model.findProductionByTitle(titulo);
         //Envio la produccion con su director y sus actores
-        this.#videoSystemVista.showMoviesCharacteristics(productionSelected, this.#videoSystemModelo.getDirectorProduction(productionSelected),this.#videoSystemModelo.getActorsProduction(productionSelected));
-        this.#videoSystemVista.bindPeople(this.handlePeople); 
-        this.#videoSystemVista.bindNewWindow(this.handleNewWindow);
+        this.#view.showMoviesCharacteristics(productionSelected, this.#model.getDirectorProduction(productionSelected),this.#model.getActorsProduction(productionSelected));
+        this.#view.bindPeople(this.handlePeople); 
+        this.#view.bindNewWindow(this.handleNewWindow);
     }
     
     //Enviará uno u otro iterador en función del data-option
     //O cerrará todas las ventanas emergentes a la vez
     handleMenu = (opcion) => {
         if (opcion == "director") {
-            this.#videoSystemVista.showPeopleList(opcion, this.#videoSystemModelo.directors);
-            this.#videoSystemVista.bindPeople(this.handlePeople); 
+            this.#view.showPeopleList(opcion, this.#model.directors);
+            this.#view.bindPeople(this.handlePeople); 
         }if(opcion == "actor"){
-            this.#videoSystemVista.showPeopleList(opcion, this.#videoSystemModelo.actors);
-            this.#videoSystemVista.bindPeople(this.handlePeople); 
+            this.#view.showPeopleList(opcion, this.#model.actors);
+            this.#view.bindPeople(this.handlePeople); 
         }if(opcion == "windows"){
-            this.#videoSystemVista.closeWindows();
+            this.#view.closeWindows();
         };
     }
 
@@ -180,9 +181,9 @@ class VideoSystemController {
         let iteratorProductions;
         
         if (categoria == "director") {
-            iterator=this.#videoSystemModelo.directors;
+            iterator=this.#model.directors;
         }if(categoria == "actor"){
-            iterator=this.#videoSystemModelo.actors;
+            iterator=this.#model.actors;
         }
 
         for (let person of iterator) {
@@ -190,21 +191,297 @@ class VideoSystemController {
                 personSelected = person;
                 if (categoria == "director") {
                     //Guardo las producciones asignadas al director
-                    iteratorProductions = this.#videoSystemModelo.getProductionsDirector(personSelected);
+                    iteratorProductions = this.#model.getProductionsDirector(personSelected);
                 }if(categoria == "actor"){
                     //Guardo las producciones asignadas al actor
-                    iteratorProductions = this.#videoSystemModelo.getProductionsActor(personSelected);
+                    iteratorProductions = this.#model.getProductionsActor(personSelected);
                 }
             }
         }
 
-        this.#videoSystemVista.showPeopleCharacteristics(personSelected,iteratorProductions);
-        this.#videoSystemVista.bindPeliculas(this.handleMovies);
+        this.#view.showPeopleCharacteristics(personSelected,iteratorProductions);
+        this.#view.bindPeliculas(this.handleMovies);
     }
     
     //Enlaza el boton de información a una nueva ventana
     handleNewWindow = (titulo) => {
-        this.#videoSystemVista.newWindow(this.#videoSystemModelo.findMovieByTitle(titulo));
+        this.#view.newWindow(this.#model.findProductionByTitle(titulo));
+    }
+
+    //Opciones del menú de registro
+    handleForm = (opcion) => {
+        if(opcion == "AddProd"){
+            this.#view.showAddProductionForm(this.#model.directors,this.#model.actors,this.#model.categorias);
+            this.#view.bindAddProduction(this.handleAddProduction, this.handleFindProduction);
+        }if(opcion == "DelProd"){
+            this.#view.showDelProductionForm(this.#model.productions);
+            this.#view.bindDeleteProduction(this.handleDelProduction);
+        }if(opcion == "AddCat") {
+            this.#view.showAddCategoryForm();
+            this.#view.bindAddCategory(this.handleAddCategory, this.handleFindCategory);
+        }if (opcion == "DelCat") {
+            this.#view.showDeleteCategory(this.#model.categorias);
+            this.#view.bindDeleteCategory(this.handleDelCategory);
+        }if (opcion == "AddPer"){
+            this.#view.showAddPersonForm();
+            this.#view.bindAddPerson(this.handleAddPerson,this.handleFindPerson);
+        }if (opcion == "DelPer"){
+            this.#view.showDeleteDirectorForm(this.#model.directors);
+            this.#view.bindDeleteDirector(this.handleDelPerson, this.handleSwitchActorList);
+        }if (opcion == "AssignProd"){
+            this.#view.showAssignDeassignProductionsChecks("Asignar");   
+            this.#view.bindSelectedPerson(this.handleSelectPersonAssign);
+        }if (opcion == "DeasProd"){
+            this.#view.showAssignDeassignProductionsChecks("Desasignar");   
+            this.#view.bindSelectedPerson(this.handleSelectPersonDeassign);
+        }
+    }
+    
+    //Manejador para añadir una producción
+    handleAddProduction = (production, director, actors, categories) => {
+        let newProduction ;
+        //Compruebo si tiene la propiedad seasons
+        if (production.hasOwnProperty("seasons")) {
+            //Instancio una nueva Serie
+            newProduction = new Serie (production.title, production.nationality, production.publication, production.synopsis, production.image, new Resource, new Coordinate, production.seasons);
+        }else{
+            //Instancio una nueva Película
+            newProduction = new Movie (production.title, production.nationality, production.publication, production.synopsis, production.image, new Resource, new Coordinate);
+        }
+        //Asigno el director
+        this.#model.assignDirector(this.#model.findDirectorByPosition(director),newProduction);
+        //Asigno los actores
+        actors.forEach(actor => {
+                this.#model.assignActor(this.#model.findActorByPosition(actor), newProduction);
+        });
+        //Asigno las categorías
+        categories.forEach(category => {
+            this.#model.assignCategory(this.#model.findCategoryByPosition(category), newProduction);
+        });
+
+        this.#view.showAddProductionForm(this.#model.directors,this.#model.actors,this.#model.categorias);
+        this.#view.bindAddProduction(this.handleAddProduction, this.handleFindProduction);
+        this.#view.modalAddDeleteProduction(newProduction, "añadida");
+    }
+
+    //Buscará una película por su título 
+    //Si la encuentra devolverá true
+    handleFindProduction = (productionTitle) => {
+        return this.#model.findProductionByTitle(productionTitle) == undefined ? false : true;
+    }
+
+    //Eliminará una producción del VideoSystem
+    handleDelProduction = (title) => {
+        let deleteProduction;
+
+        for (let production of this.#model.productions) {
+            if (production.title == title){
+                deleteProduction = production;
+                this.#model.removeProduction(production);
+            }
+        }
+        //Reinicio el formulario
+        this.#view.showDelProductionForm(this.#model.productions);
+        this.#view.bindDeleteProduction(this.handleDelProduction);
+        this.#view.modalAddDeleteProduction(deleteProduction, "eliminada");
+    }
+
+    //Mostrará un formulario con una lista u otra dependiendo de la 
+    //opción elegida en los checkbox
+    handleSelectPersonAssign = (opcion) => {
+        if (opcion == "director") {
+            this.#view.showAssignProductionsForm(this.#model.directors,this.#model.productions, opcion);
+        }if (opcion == "actor") {
+            this.#view.showAssignProductionsForm(this.#model.actors,this.#model.productions, opcion);
+        }
+
+        this.#view.bindAssignProductionPerson(this.handleAssignProduction, this.handleFindMovieAssigned);
+    }
+
+    //Asignará la producción con el actor o el director
+    handleAssignProduction = (person, production ,option) => {
+        if (option == "director") {
+            this.#model.assignDirector(this.#model.findDirectorByNameLastname(person), this.#model.findProductionByTitle(production));
+            this.#view.showAssignProductionsForm(this.#model.directors,this.#model.productions, option);
+            this.#view.modalAssignDeassignProduction(this.#model.findProductionByTitle(production),this.#model.findDirectorByNameLastname(person), "asignada");
+        }if (option == "actor") {
+            this.#model.assignActor(this.#model.findActorByNameLastname(person), this.#model.findProductionByTitle(production));
+            this.#view.showAssignProductionsForm(this.#model.actors,this.#model.productions, option);
+            this.#view.modalAssignDeassignProduction(this.#model.findProductionByTitle(production),this.#model.findActorByNameLastname(person), "asignada");
+        }
+        this.#view.bindAssignProductionPerson(this.handleAssignProduction, this.handleFindMovieAssigned);
+    }
+
+    //Busca si la película se encuentra ya asignada al director o actor
+    handleFindMovieAssigned = (production, personSelected, option) => {
+        let found = false;
+
+        if (option == "director") {
+            if (this.#model.getDirectorProduction(this.#model.findProductionByTitle(production)).includes(this.#model.findDirectorByNameLastname(personSelected))) {
+                found == true;
+            }
+        }if (option == "actor") {
+            if (this.#model.getActorsProduction(this.#model.findProductionByTitle(production)).includes(this.#model.findActorByNameLastname(personSelected))) {
+                found = true;
+            }
+        }
+
+        return found;
+    }
+    
+    //Mostrará un formulario con las películas asignadas por el director/actor en el select
+    handleSelectPersonDeassign = (opcion) => {
+        if (opcion == "director") {
+            this.#view.showDeassignProductionsForm(this.#model.directors,this.#model.productions, opcion);
+        }if (opcion == "actor") {
+            this.#view.showDeassignProductionsForm(this.#model.actors,this.#model.productions, opcion);
+        }
+
+        this.#view.bindDeassignProductionPersonSelect(this.handleShowSelectOptions);
+    }
+
+    handleShowSelectOptions = (person, opcion) => {
+        if (opcion == "director") {
+            this.#view.showProductionsSelect(this.#model.getProductionsDirector(this.#model.findDirectorByNameLastname(person)));
+        }if (opcion == "actor") {
+            this.#view.showProductionsSelect(this.#model.getProductionsActor(this.#model.findActorByNameLastname(person)));
+        }
+
+        this.#view.bindDeassignProduction(this.handleDeassignProduction);
+    }
+
+    handleDeassignProduction = (person,production,opcion) => {
+        if (opcion == "director") {
+            this.#model.deassignDirector(this.#model.findDirectorByNameLastname(person), this.#model.findProductionByTitle(production));
+            this.#view.showProductionsSelect(this.#model.getProductionsDirector(this.#model.findDirectorByNameLastname(person)));
+            this.#view.modalAssignDeassignProduction(this.#model.findProductionByTitle(production),this.#model.findDirectorByNameLastname(person), "desasignada");
+        }if (opcion == "actor") {
+            this.#model.deassignActor(this.#model.findActorByNameLastname(person), this.#model.findProductionByTitle(production));
+            this.#view.showProductionsSelect(this.#model.getProductionsActor(this.#model.findActorByNameLastname(person)));
+            this.#view.modalAssignDeassignProduction(this.#model.findProductionByTitle(production),this.#model.findActorByNameLastname(person), "desasignada");
+        }
+
+        this.#view.bindDeassignProduction(this.handleDeassignProduction);
+    }
+
+    //Añadirá una categoría
+    handleAddCategory = (categoria) => {
+        this.#model.addCategory(new Category (categoria.name,categoria.description,categoria.image));
+        
+        this.chargeMenu();
+        this.#view.showAddCategoryForm();
+        this.#view.bindAddCategory(this.handleAddCategory, this.handleFindCategory);
+        this.#view.modalAddDeleteCategory(categoria, "añadida");
+    }
+
+    //Busca si la categoría se encuentra ya añadida
+    handleFindCategory = (categoryname) => {
+        let found = false;
+
+        for (let category of this.#model.categorias) {
+            if (category.name.toUpperCase() == categoryname.toUpperCase()) {
+                found = true;
+            }
+        }
+                
+        return found;
+    } 
+
+    //Eliminará una categoria del VideoSystem
+    handleDelCategory = (name) => {
+        let categoriaEliminada;
+
+        for (let category of this.#model.categorias) {
+            if (category.name == name) {
+                categoriaEliminada = category;
+                this.#model.removeCategory(category);
+            }
+        }
+
+        //Reinicio el formulario
+        this.chargeMenu();
+        this.#view.showDeleteCategory(this.#model.categorias);
+        this.#view.bindDeleteCategory(this.handleDelCategory);
+        this.#view.modalAddDeleteCategory(categoriaEliminada, "eliminada");
+    }
+
+    //Añadirá una persona al VideoSystem dependiendo de si es actor o director
+    handleAddPerson = (person,option) => {
+        //Instancio una nueva persona
+        let newPerson = new Person(person.name, person.lastname1, person.lastname2, person.born, person.picture);
+
+        if (option == "Director") {
+            this.#model.addDirector(newPerson);
+            //Reinicio el formulario
+            this.#view.showAddPersonForm();
+            this.#view.bindAddPerson(this.handleAddPerson,this.handleFindPerson);
+            this.#view.modalAddDeletePerson(person, "Director", "añadido");
+        }else{
+            this.#model.addActor(newPerson);
+            //Reinicio el formulario
+            this.#view.showAddPersonForm();
+            this.#view.bindAddPerson(this.handleAddPerson,this.handleFindPerson);
+            this.#view.modalAddDeletePerson(person, "Actor", "añadido");
+        }
+    }
+
+    //Buscará si la persona a añadir se encuentra ya en el VideoSystem
+    handleFindPerson = (person, option) => {
+        let found = false;
+
+        if (option == "Director") {
+            //Si devuelve algo, es porque existe el actor
+            if (this.#model.findDirectorByNameLastname(person) != undefined) {
+                found = true;   
+            }
+        }else{
+            if (this.#model.findActorByNameLastname(person) != undefined) {
+                found = true;   
+            }
+        }
+
+        return found;
+    }
+
+    //Eliminará una persona del VideoSystem
+    handleDelPerson = (name, lastname1, opcion) => {
+        if (opcion == "Director") {
+            let directorSelected;
+
+            for (let director of this.#model.directors) {
+                if (director.name == name && (director.lastname1 == lastname1)) {
+                    //Guardo el director seleccionado para mostrarlo en el modal
+                    directorSelected = director;
+                    this.#model.removeDirector(director);
+                }
+            }
+            this.#view.showDeleteDirectorForm(this.#model.directors);
+            this.#view.bindDeleteDirector(this.handleDelPerson, this.handleSwitchActorList);
+            this.#view.modalAddDeletePerson(directorSelected, "Director", "eliminado");
+        }if (opcion == "Actor"){
+            let actorSelected;
+            for (let actor of this.#model.actors) {
+                if (actor.name == name && (actor.lastname1 == lastname1)) {
+                    //Guardo el actor seleccionado para mostrarlo en el modal
+                    actorSelected = actor;
+                    this.#model.removeActor(actor);
+                }
+            }
+            this.#view.showDeleteActorForm(this.#model.actors);
+            this.#view.bindDeleteActor(this.handleDelPerson, this.handleSwitchDirectorList);
+            this.#view.modalAddDeletePerson(actorSelected, "Actor", "eliminado");
+        }
+    }
+
+    //Manejador para cambiar de vista en el formulario para eliminar persona
+    handleSwitchDirectorList = () => {
+        this.#view.showDeleteDirectorForm(this.#model.directors);
+        this.#view.bindDeleteDirector(this.handleDelPerson, this.handleSwitchActorList);
+    }
+    //Manejador para cambiar de vista en el formulario para eliminar persona
+    handleSwitchActorList = () => {
+        this.#view.showDeleteActorForm(this.#model.actors);
+        this.#view.bindDeleteActor(this.handleDelPerson, this.handleSwitchDirectorList);
     }
 }
 

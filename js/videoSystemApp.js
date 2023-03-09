@@ -12,7 +12,8 @@ $(function(){
     showCategoryMovies: (event) => VideoSystemApp.handleCategorias(event.state.category),
     showMovieCharacteristics: (event) => VideoSystemApp.handleMovies(event.state.movie),
     menuOptions: (event) => VideoSystemApp.handleMenu(event.state.option),
-    showPersonCharacteristics: (event) => VideoSystemApp.handlePeople(event.state.person.category ,event.state.person.name, event.state.person.lastname1)
+    showPersonCharacteristics: (event) => VideoSystemApp.handlePeople(event.state.person.category ,event.state.person.name, event.state.person.lastname1),
+    showFormOption: (event) => VideoSystemApp.handleForm(event.state.option),
 	}
 
   window.addEventListener('popstate', function(event) {

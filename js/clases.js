@@ -9,7 +9,7 @@ class Person {
     #born;
     #picture;
 
-    constructor(name, lastname1, lastname2 = "", born, picture = "") {
+    constructor(name, lastname1, lastname2 , born, picture = "") {
         this.#name = name;
         this.#lastname1 = lastname1;
         this.#lastname2 = lastname2;
@@ -31,8 +31,9 @@ class Person {
         return this.#lastname2;
     }
 
+    //.toLocaleDateString('en-us', { year:"numeric", month:"long", day:"numeric"})
     get born() {
-        return this.#born.toLocaleDateString('en-us', { year:"numeric", month:"long", day:"numeric"});
+        return this.#born;
     }
 
     get picture() {
@@ -47,11 +48,12 @@ class Person {
 class Category {
     #name;
     #description;
+    #image;
 
-    constructor(name, description = "") {
-
+    constructor(name, description = "", image) {
         this.#name = name;
         this.#description = description;
+        this.#image = image;
     }
 
     get name() {
@@ -62,6 +64,11 @@ class Category {
     get description() {
         return this.#description;
     }
+
+    get image() {
+        return this.#image;
+    }
+
 
     toString() {
         return "Category:\r\nNombre:"+this.#name + "\r\nDescripción " + this.#description+"\n\n";
@@ -109,7 +116,7 @@ class Production {
     }
 
     get publication(){
-        return this.#publication.toLocaleDateString('en-us', { year:"numeric", month:"long", day:"numeric"});
+        return this.#publication;
     }
 
     get synopsis(){
@@ -132,7 +139,7 @@ class Movie extends Production {
     constructor(title, nationality, publication, synopsis, image, resource = new Resource, locations = new Coordinate) {
         //Excepción que controla que locations sea una instancia de locations
         if (!(locations instanceof Coordinate)) throw new NotThisType();
-        // Excepción que controla que resource sea una instancia de Person
+        // Excepción que controla que resource sea una instancia de Resource
         if (!(resource instanceof Resource)) throw new NotThisType();
 
         super(title, nationality, publication, synopsis, image)
@@ -153,7 +160,7 @@ class Serie extends Production {
     constructor(title, nationality, publication, synopsis, image, resource = new Resource, locations = new Coordinate, seasons = "") {
         // Excepción que controla que locations sea una instancia de Coordinate
         if (!(locations instanceof Coordinate)) throw new NotThisType();
-        // Excepción que controla que resource sea una instancia de Person
+        // Excepción que controla que resource sea una instancia de Resource
         if (!(resource instanceof Resource)) throw new NotThisType();
 
         super(title, nationality, publication, synopsis, image);
